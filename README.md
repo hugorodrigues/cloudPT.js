@@ -33,7 +33,13 @@ cloudPt('List',{ sandbox: true, pathname: '/stuff/Téstâção', order_by: 'mtim
 ## Server side
 
 ```js
-var cloudPt = require('cloudPT.js')();
+var cloudPt = require('./cloudPT.js')({
+	oAuthAppKey: 'YOUR APP KEY',
+	oAuthAppSecret: 'YOUR APP SECRET',
+
+	oAuthConsumerKey: 'A CONSUMER/ACCESS KEY',
+	oAuthConsumerSecret: 'A CONSUMER/ACCESS SECRET',
+});
 
 cloudPt('Metadata',{ pathname: '/stuff/Téstâção' }, function(error, data){
     console.log(error, data)
