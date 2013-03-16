@@ -1,0 +1,16 @@
+{
+  "name": "cloudPT.js",
+  "description": "CloudPT for node and browser",
+  "version": "0.1.0",
+  "author": "Hugo Rodrigues <hugo@StartEffect.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://hugorodrigues@github.com/hugorodrigues/cloudPT.js.git"
+  },
+	"main": "cloudPT.js",  
+  "homepage":"https:/github.com/hugorodrigues/cloudPT.js", 
+  "keywords": ["cloudpt", "api", "rpc", "JSON-RPC", "JSON", "browser"],
+  "dependencies": {
+    "oauth": "latest"
+  }  
+}
