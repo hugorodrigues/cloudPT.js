@@ -9,13 +9,13 @@ This is a little API wrapper (less than 90LOC) that implements cloudPT in a simp
 ## Installation
 
 ```bash
-$ npm install cloudPT.js
+$ npm install cloudpt.js
 ```
 
 ## Usage
 
 ```js
-var cloudPt = require('cloudPT.js')({
+var cloudPt = require('cloudpt.js')({
 	oAuthAppKey: 'YOUR APP KEY',
 	oAuthAppSecret: 'YOUR APP SECRET',
 
@@ -45,7 +45,7 @@ You can have multiple sessions without create new instances, just pass the oAuth
 `cloudPt(<method>,<params>,<callback>,<oauthConsumer>)`
 
 ```js
-var cloudPt = require('cloudPT.js')({
+var cloudPt = require('cloudpt.js')({
 	oAuthAppKey: 'YOUR APP KEY',
 	oAuthAppSecret: 'YOUR APP SECRET',
 });
@@ -70,7 +70,7 @@ Note: You can still pass the oAuthConsumerKey/oAuthConsumerSecret in the initial
 
 (The MIT License)
 
-Copyright (c) 2010-2013 Hugo Rodrigues, http://starteffect.com
+Copyright (c) 2013 Hugo Rodrigues, http://starteffect.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

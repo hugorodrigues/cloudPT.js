@@ -1,4 +1,4 @@
-var cloudPt = require('./cloudPT.js')({
+var cloudPt = require('./cloudpt.js')({
 	oAuthAppKey: 'YOUR APP KEY',
 	oAuthAppSecret: 'YOUR APP SECRET',
 
