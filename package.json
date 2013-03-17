@@ -1,5 +1,5 @@
 {
-  "name": "cloudpt.js",
+  "name": "cloudpt",
   "description": "cloudPT API with multiple sessions support",
   "version": "0.1.0",
   "author": "Hugo Rodrigues <hugo@StartEffect.com>",
