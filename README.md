@@ -7,12 +7,15 @@ cloudPT for Node
 
 This is a little API wrapper (less than 90LOC) that implements cloudPT in a simple RPC fashion: `cloudPt(<method>,<params>,<callback>)`
 
+## Usage
 
+```bash
+$ npm install cloudPT.js
+```
 
 ## Usage
 
 ```js
-
 cloudPt('Metadata',{ pathname: '/stuff/Téstâção' }, function(error, data){
 	console.log(error, data)
 });
@@ -46,6 +49,31 @@ cloudPt('Metadata',{ pathname: '/stuff/Téstâção' }, function(error, data){
 });
 ```
 
+
+
+## Multiple sessions
+You can can have multiple sessions without create new instances, just pass the oAuthConsumerKey/oAuthConsumerSecret in the last param:
+`cloudPt(<method>,<params>,<callback>,<oauthConsumer>)`
+
+```js
+var cloudPt = require('./cloudPT.js')({
+	oAuthAppKey: 'YOUR APP KEY',
+	oAuthAppSecret: 'YOUR APP SECRET',
+});
+
+
+// This one will use another session
+cloudPt('Metadata',{ pathname: '/' }, function(error, data){
+	console.log(error, data)
+}, {oAuthConsumerKey: 'sessions1_key', oAuthConsumerSecret: 'xxx'});
+
+
+var anotherAccount = {oAuthConsumerKey: 'sessions2_key', oAuthConsumerSecret: 'xxx'}
+cloudPt('Metadata',{ pathname: '/' }, function(error, data){
+	console.log(error, data)
+}, anotherAccount);
+
+```
 
 
 

@@ -45,11 +45,12 @@ module.exports = function(config){
 	  return str.join("&");
 	}
 
-	function httpCall(verb, url, params, cb, oAuthConf){
+	function httpCall(verb, url, params, cb, oAuthConf){ 
+
 		if (verb == 'post')
-			oAuth.post(url, config.oAuthConsumerKey, config.oAuthConsumerSecret, params, cb);
+			oAuth.post(url, oAuthConf.oAuthConsumerKey || config.oAuthConsumerKey, oAuthConf.oAuthConsumerSecret || config.oAuthConsumerSecret, params, cb);
 		else
-			oAuth.get(url+(params ? '?'+serialize(params): ''), config.oAuthConsumerKey, config.oAuthConsumerSecret, cb);
+			oAuth.get(url+(params ? '?'+serialize(params): ''), oAuthConf.oAuthConsumerKey || config.oAuthConsumerKey, oAuthConf.oAuthConsumerSecret || config.oAuthConsumerSecret, cb);
 
 		//console.log(url);
 	}
@@ -65,19 +66,18 @@ module.exports = function(config){
 		var url = schema[method][1];
 		url = url.replace("[cloudpt|sandbox]", (params.sandbox) ? 'sandbox' : 'cloudpt');
 
-		// params.pathname withou first /
+		// params.pathname without first /
 		if (params.pathname && params.pathname.substr(0,1) == '/')
-		{
-			params.pathname = params.pathname.substr(1);
-			url = url.replace("[pathname]", (params.pathname) ? params.pathname : '');
-		}
+				params.pathname = params.pathname.substr(1);
+
+		url = url.replace("[pathname]", (params.pathname) ? params.pathname : '');
 
 		httpCall(schema[method][0], url, params, function(error, data){
     	if (error) 
     		cb(error) 
     	else 
     		cb(null, JSON.parse(data))
-		})
+		}, oAuthConf || {})
 
 	}
 

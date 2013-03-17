@@ -7,6 +7,14 @@ var cloudPt = require('./cloudPT.js')({
 });
 
 
-cloudPt('Metadata',{ pathname: '/warez' }, function(error, data){
+cloudPt('Metadata',{ pathname: '/' }, function(error, data){
 	console.log(error, data)
 });
+
+
+// Using another session
+cloudPt('Metadata',{ pathname: '/' }, function(error, data){
+	console.log(error, data)
+}, {oAuthConsumerKey: 'xxxx', oAuthConsumerSecret: 'xxxx'});
+
+
