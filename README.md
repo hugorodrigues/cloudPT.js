@@ -1,7 +1,6 @@
 cloudPT.js
 ==========
-
-cloudPT for Node
+cloudPT API for nodeJS with multiple sessions support
 
 ---
 
@@ -36,7 +35,6 @@ cloudPt('CreateFolder',{ root: 'cloudpt', path: '/fuckYeah' }, function(error, d
 cloudPt('List',{ sandbox: true, pathname: '/stuff/Téstâção', order_by: 'mtime' }, function(error, data){
 	console.log(error, data)
 });
-
 ```
 
 
@@ -58,11 +56,9 @@ cloudPt('Metadata',{ pathname: '/' }, function(error, data){
 }, {oAuthConsumerKey: 'sessions1_key', oAuthConsumerSecret: 'xxx'});
 
 // another session
-var anotherAccount = {oAuthConsumerKey: 'sessions2_key', oAuthConsumerSecret: 'xxx'}
 cloudPt('Metadata',{ pathname: '/' }, function(error, data){
 	console.log(error, data)
 }, anotherAccount);
-
 ```
 Note: You can still pass the oAuthConsumerKey/oAuthConsumerSecret in the initialization, that will be the default.
 
@@ -74,8 +70,7 @@ Note: You can still pass the oAuthConsumerKey/oAuthConsumerSecret in the initial
 
 (The MIT License)
 
-Copyright (c) 2010-2013 Hugo Rodrigues, Hugo Rodrigues, StartEffect U. Lda
-http://starteffect.com
+Copyright (c) 2010-2013 Hugo Rodrigues, http://starteffect.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
