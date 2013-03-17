@@ -7,7 +7,7 @@ cloudPT for Node
 
 This is a little API wrapper (less than 90LOC) that implements cloudPT in a simple RPC fashion: `cloudPt(<method>,<params>,<callback>)`
 
-## Usage
+## Installation
 
 ```bash
 $ npm install cloudPT.js
@@ -16,27 +16,7 @@ $ npm install cloudPT.js
 ## Usage
 
 ```js
-cloudPt('Metadata',{ pathname: '/stuff/Téstâção' }, function(error, data){
-	console.log(error, data)
-});
-
-cloudPt('CreateFolder',{ root: 'cloudpt', path: '/fuckYeah' }, function(error, data){
-    console.log(error, data)
-});
-
-// sandbox mode
-cloudPt('List',{ sandbox: true, pathname: '/stuff/Téstâção', order_by: 'mtime' }, function(error, data){
-    console.log(error, data)
-});
-
-```
-
-
-
-## Server side
-
-```js
-var cloudPt = require('./cloudPT.js')({
+var cloudPt = require('cloudPT.js')({
 	oAuthAppKey: 'YOUR APP KEY',
 	oAuthAppSecret: 'YOUR APP SECRET',
 
@@ -45,36 +25,46 @@ var cloudPt = require('./cloudPT.js')({
 });
 
 cloudPt('Metadata',{ pathname: '/stuff/Téstâção' }, function(error, data){
-    console.log(error, data)
+	console.log(error, data)
 });
+
+cloudPt('CreateFolder',{ root: 'cloudpt', path: '/fuckYeah' }, function(error, data){
+	console.log(error, data)
+});
+
+// sandbox mode
+cloudPt('List',{ sandbox: true, pathname: '/stuff/Téstâção', order_by: 'mtime' }, function(error, data){
+	console.log(error, data)
+});
+
 ```
 
 
 
 ## Multiple sessions
-You can can have multiple sessions without create new instances, just pass the oAuthConsumerKey/oAuthConsumerSecret in the last param:
+You can have multiple sessions without create new instances, just pass the oAuthConsumerKey/oAuthConsumerSecret in the last param:
+
 `cloudPt(<method>,<params>,<callback>,<oauthConsumer>)`
 
 ```js
-var cloudPt = require('./cloudPT.js')({
+var cloudPt = require('cloudPT.js')({
 	oAuthAppKey: 'YOUR APP KEY',
 	oAuthAppSecret: 'YOUR APP SECRET',
 });
 
-
-// This one will use another session
+// oAuth consumer key passed
 cloudPt('Metadata',{ pathname: '/' }, function(error, data){
 	console.log(error, data)
 }, {oAuthConsumerKey: 'sessions1_key', oAuthConsumerSecret: 'xxx'});
 
-
+// another session
 var anotherAccount = {oAuthConsumerKey: 'sessions2_key', oAuthConsumerSecret: 'xxx'}
 cloudPt('Metadata',{ pathname: '/' }, function(error, data){
 	console.log(error, data)
 }, anotherAccount);
 
 ```
-
+Note: You can still pass the oAuthConsumerKey/oAuthConsumerSecret in the initialization, that will be the default.
 
 
 
