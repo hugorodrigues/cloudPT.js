@@ -1,7 +1,7 @@
 cloudPT.js
 ==========
 
-cloudPT for Node and Browser 
+cloudPT for Node
 
 ---
 
@@ -47,9 +47,6 @@ cloudPt('Metadata',{ pathname: '/stuff/Téstâção' }, function(error, data){
 ```
 
 
-
-## Browser side
-TBD
 
 
 
