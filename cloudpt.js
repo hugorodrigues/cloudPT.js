@@ -76,7 +76,7 @@ module.exports = function(config){
     	if (error) 
     		cb(error) 
     	else 
-    		cb(null, JSON.parse(data))
+    		cb(null, ((method != 'thumbnails') ? JSON.parse(data) : data) )
 		}, oAuthConf || {})
 
 	}
