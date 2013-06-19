@@ -63,6 +63,8 @@ cloudPt('Metadata',{ pathname: '/' }, function(error, data){
 Note: You can still pass the oAuthConsumerKey/oAuthConsumerSecret in the initialization, that will be the default.
 
 
+## Streams
+Every request returns a stream. use it with imagination :)
 
 
 ---

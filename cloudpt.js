@@ -5,6 +5,7 @@
 
 module.exports = function(config){
 
+	var request	= require('request');
 	var schema = {
 		metadata 					: ['get', 'https://publicapi.cloudpt.pt/1/Metadata/[cloudpt|sandbox]/[pathname]'],
 		metadatashare			: ['get', 'https://publicapi.cloudpt.pt/1/MetadataShare/[shareid]/[pathname]'],
@@ -34,25 +35,27 @@ module.exports = function(config){
 		'account/info' 		: ['get', 'https://publicapi.cloudpt.pt/1/Account/Info'],
 	}
 
-	var OAuth= require('oauth').OAuth;
-			oAuth= new OAuth("https://cloudpt.pt/oauth/request_token", "https://cloudpt.pt/oauth/access_token", config.oAuthAppKey, config.oAuthAppSecret, "1.0", "oob", "HMAC-SHA1" );
+	// Everything passes here.
+	function httpCall(verb, url, params, cb, oAuthConf){
 
-	// Object to querystring: stackoverflow.com/questions/1714786/
-	var serialize = function(obj) {
-	  var str = [];
-	  for(var p in obj)
-	     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
-	  return str.join("&");
-	}
+		var requestParams = {
+			url:url,
+			method:verb,
+			body: (verb == 'post') ? params : null,
+			qs: (verb == 'get') ? params : null,
+			json:true,
+			oauth: {
+				'consumer_key': config.oAuthAppKey,
+				'consumer_secret': config.oAuthAppSecret,
+				'token': oAuthConf.oAuthConsumerKey || config.oAuthConsumerKey,
+				'token_secret': oAuthConf.oAuthConsumerSecret || config.oAuthConsumerSecret
+			}
+		}
 
-	function httpCall(verb, url, params, cb, oAuthConf){ 
-
-		if (verb == 'post')
-			oAuth.post(url, oAuthConf.oAuthConsumerKey || config.oAuthConsumerKey, oAuthConf.oAuthConsumerSecret || config.oAuthConsumerSecret, params, cb);
-		else
-			oAuth.get(url+(params ? '?'+serialize(params): ''), oAuthConf.oAuthConsumerKey || config.oAuthConsumerKey, oAuthConf.oAuthConsumerSecret || config.oAuthConsumerSecret, cb);
-
-		//console.log(url);
+		// We are also returning the request object (so you can use to pipe it)
+		return request(requestParams, function(error, response, body){
+			cb(error, body);
+		})
 	}
 
 	return function(method, params, cb, oAuthConf) {
@@ -72,12 +75,7 @@ module.exports = function(config){
 
 		url = url.replace("[pathname]", (params.pathname) ? params.pathname : '');
 
-		httpCall(schema[method][0], url, params, function(error, data){
-    	if (error) 
-    		cb(error) 
-    	else 
-    		cb(null, ((method != 'thumbnails') ? JSON.parse(data) : data) )
-		}, oAuthConf || {})
+		return httpCall(schema[method][0], url, params, cb, oAuthConf || {})
 
 	}
 

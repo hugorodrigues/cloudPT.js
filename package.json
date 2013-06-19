@@ -1,7 +1,7 @@
 {
   "name": "cloudpt",
   "description": "cloudPT API with multiple sessions support",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "author": "Hugo Rodrigues <hugo@StartEffect.com>",
   "repository": {
     "type": "git",
@@ -11,6 +11,6 @@
   "homepage":"https:/github.com/hugorodrigues/cloudPT.js", 
   "keywords": ["cloudpt", "api", "rpc", "JSON-RPC", "JSON", "cloud", "oauth"],
   "dependencies": {
-    "oauth": "latest"
+    "request": "latest"
   }  
 }
